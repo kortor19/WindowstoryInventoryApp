@@ -1,14 +1,15 @@
-@extends('layouts.landing')
+@extends('layouts.headerless')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header signup-header">
-                <h3> {{ __(' Create Your Account to Get started') }} </h3>
+            <div class="card border-primary loginfrm">
 
-               </div>
+                <div class="logo">
+                    <img src="{{ asset('images/winlogo.png') }}" class="img-fluid" alt="Windowstory Limited">
+                     <h3 class="card-title frm-title">{{ __('Create Your Account to Get started') }}</h3>
+                </div>             
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -109,8 +110,13 @@
                                     {{ __('Register') }}
                                 </button>
                             </div>
-                            <div class="form-group offset-md-3">
+
+                            <div class="create-link offset-md-3">
+                               Already have an account? 
                                 <a href="{{route('login')}}" class="btn align-self-center"> <strong> Sign in Instead</strong></a>
+                            </div>
+                            <div class="form-group create-link offset-md-3">
+                                
                             </div>
                             
                         </div>
