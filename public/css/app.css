@@ -10644,3 +10644,12 @@ a.text-dark:focus {
   }
 }
 
+.signup-header {
+  text-align: center;
+  color: #000;
+}
+
+.alt-login {
+  display: block;
+}
+
