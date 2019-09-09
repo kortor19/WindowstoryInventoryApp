@@ -10686,3 +10686,26 @@ a.text-dark:focus {
   height: auto;
 }
 
+.card-icon-bg .card-body {
+  display: flex;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 0;
+}
+
+.card-icon-bg {
+  position: relative;
+  z-index: 1;
+}
+
+.card-icon-bg .card-body .content {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 70px;
+}
+
