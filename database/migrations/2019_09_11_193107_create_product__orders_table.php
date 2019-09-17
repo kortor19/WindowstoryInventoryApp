@@ -15,11 +15,10 @@ class CreateProductOrdersTable extends Migration
     {
         Schema::create('product__orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //$table->engine = 'InnoDB';
-            $table->string('product_id', 32)->index();
             $table->string('product_name');
             $table->string('unit');
-            $table->string('product_category_id', 32)->references('product_category_id')->on('product__categories');
+            $table->unsignedBigInteger('product_category_id');
+            $table->foreign('product_category_id')->references('id')->on('product__categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

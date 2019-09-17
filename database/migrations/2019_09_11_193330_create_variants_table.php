@@ -15,8 +15,6 @@ class CreateVariantsTable extends Migration
     {
         Schema::create('variants', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //$table->engine = 'InnoDB';
-            $table->string('variant_id', 32)->index();
             $table->string('variant_code');
             $table->string('color_code');
             $table->string('control_side');

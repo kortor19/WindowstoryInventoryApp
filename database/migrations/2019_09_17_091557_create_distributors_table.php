@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDistributoriesTable extends Migration
+class CreateDistributorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateDistributoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('distributories', function (Blueprint $table) {
+        Schema::create('distributors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //$table->engine = 'InnoDB';
-            $table->string('distributor_id', 32)->index();
             $table->string('firstName');
             $table->string('lastName');
             $table->string('gender');
@@ -36,6 +34,6 @@ class CreateDistributoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('distributories');
+        Schema::dropIfExists('distributors');
     }
 }

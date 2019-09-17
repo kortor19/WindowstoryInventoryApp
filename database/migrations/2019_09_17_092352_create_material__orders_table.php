@@ -15,13 +15,13 @@ class CreateMaterialOrdersTable extends Migration
     {
         Schema::create('material__orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //$table->engine = 'InnoDB';
-            $table->string('material_id', 32)->index();
             $table->string('material_name');
-            $table->string('material_category_id', 32)->references('material_category_id')->on('material__categories');
+            $table->unsignedBigInteger('material_category_id');
+            $table->foreign('material_category_id')->references('id')->on('material__categories')->onDelete('cascade')->onUpdate('cascade');
             $table->string('unit_of_measurement');
             $table->string('reorder_point');
-            $table->string('variant_id', 32)->references('variant_id')->on('variants');
+            $table->unsignedBigInteger('variant_id');
+            $table->foreign('variant_id')->references('id')->on('variants')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

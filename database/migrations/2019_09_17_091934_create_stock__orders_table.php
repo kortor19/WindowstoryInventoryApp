@@ -15,12 +15,12 @@ class CreateStockOrdersTable extends Migration
     {
         Schema::create('stock__orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('stock_id', 32)->index();
-            $table->string('distributor_id', 32)->references('distributor_id')->on('distributors');
-            // $table->string('customer_id', 32);
-            $table->string('customer_id', 32)->references('customer_id')->on('customers');
-            // $table->string('variant_id', 32);
-            $table->string('variant_id', 32)->references('variant_id')->on('variants');
+            $table->unsignedBigInteger('distributor_id');
+            $table->foreign('distributor_id')->references('id')->on('distributors')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('variant_id');
+            $table->foreign('variant_id')->references('id')->on('variants')->onDelete('cascade')->onUpdate('cascade');
             $table->string('item_name');
             $table->string('width');
             $table->string('height');
@@ -30,7 +30,6 @@ class CreateStockOrdersTable extends Migration
             $table->string('out_in');
             $table->timestamps();
         });
-
     }
 
     /**

@@ -15,8 +15,6 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //$table->engine = 'InnoDB';
-            $table->string('customer_id', 32)->index();
             $table->string('firstName');
             $table->string('lastName');
             $table->string('gender');

@@ -15,13 +15,12 @@ class CreatePurchaseOrdersTable extends Migration
     {
         Schema::create('purchase__orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // $table->engine = 'InnoDB';
-            $table->string('purchase_id', 32)->index();
             $table->string('quantity');
             $table->string('price_per_unit');
             $table->string('total');
             $table->string('tax');
-            $table->string('material_id', 32)->references('material_id')->on('material__orders');
+            $table->unsignedBigInteger('material_id');
+            $table->foreign('material_id')->references('id')->on('material__orders')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

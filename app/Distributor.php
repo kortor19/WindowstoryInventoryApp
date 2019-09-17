@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Stock_Order extends Model
+class Distributor extends Model
 {
     //
 }

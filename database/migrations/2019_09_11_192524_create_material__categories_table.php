@@ -15,8 +15,6 @@ class CreateMaterialCategoriesTable extends Migration
     {
         Schema::create('material__categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //$table->engine = 'InnoDB';
-            $table->string('material_category_id', 32)->index();
             $table->string('material_category_name');
             $table->timestamps();
         });
