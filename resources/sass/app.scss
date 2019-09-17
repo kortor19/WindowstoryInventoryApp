@@ -1,0 +1,67 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.signup-header{
+	text-align:center;
+	color:$color-header;
+}
+
+.alt-login {
+	display:block;
+}
+
+.logo {
+	margin:0 auto;
+	img{
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 60%;
+	}
+	.frm-title{
+		text-align:center;
+	}	
+}
+
+.loginfrm{
+	padding:40px;
+	box-shadow: $shadow;
+}
+.create-link{
+	margin-top:20px;
+	strong{
+		color:$color-links;
+	}
+}
+
+.btn-login{
+	width:80%;
+	height:auto;
+}
+
+.card-icon-bg .card-body {
+    display: flex;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
+    border: 0;
+}
+.card-icon-bg {
+    position: relative;
+    z-index: 1;
+}
+.card-icon-bg .card-body .content {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 70px;
+}
