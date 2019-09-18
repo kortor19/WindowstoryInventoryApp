@@ -8,11 +8,11 @@
 
                 <div class="logo">
                     <img src="{{ asset('images/winlogo.png') }}" class="img-fluid" alt="Windowstory Limited">
-                     <h3 class="card-title frm-title">{{ __('Create Customer Record') }}</h3>
+                     <h3 class="card-title frm-title">{{ __('Create Distributor Record') }}</h3>
                 </div>             
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('customer.store') }}">
+                    <form method="POST" action="{{ route('distributor.store') }}">
                         @csrf
 
                         
@@ -102,12 +102,12 @@
 
 
                         <div class="form-group row">
-                            <label for="state" class="col-md-4 col-form-label text-md-right">{{ __('State of Origin') }}</label>
+                            <label for="companyName" class="col-md-4 col-form-label text-md-right">{{ __('Company Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="state" type="state" class="form-control @error('state') is-invalid @enderror" name="state" required autocomplete="state">
+                                <input id="companyName" type="text" class="form-control @error('companyName') is-invalid @enderror" name="companyName" required autocomplete="companyName">
 
-                                @error('state')
+                                @error('companyName')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
