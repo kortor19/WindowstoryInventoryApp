@@ -40,3 +40,18 @@ Route::resource('material_category', 'Material_CategoryController');
 Route::get('/material_order/create', 'Material_OrderController@create');
 Route::resource('material_order', 'Material_OrderController');
 
+//purchase order route
+Route::get('/purchase_order/create', 'Purchase_OrderController@create');
+Route::resource('purchase_order', 'Purchase_OrderController');
+
+//product category route
+Route::get('/product_category/create', 'Product_CategoryController@create');
+Route::resource('product_category', 'Product_CategoryController');
+
+//product order route
+Route::get('/product_order/create', 'Product_OrderController@create');
+Route::resource('product_order', 'Product_OrderController');
+
+//stock order route
+Route::get('/stock_order/create', 'Stock_OrderController@create');
+Route::resource('stock_order', 'Stock_OrderController');
