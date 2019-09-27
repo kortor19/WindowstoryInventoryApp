@@ -14,7 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customer = Customer::all();
+        return view('customer.show', ['customers'=>$customer]);
     }
 
     /**
@@ -35,7 +36,37 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request-> validate([
+            'firstName'=> 'required',
+            'lastName'=> 'required',
+            'gender'=>'required',
+            'email'=> 'required',
+            'phoneNumber'=> 'required|numeric',
+            'address'=> 'required',
+            'state' => 'required',
+            'country'=>'required',
+            
+        ]);
+        
+        $customer = Customer::create([
+
+            'firstName' => $request->input('firstName'),
+            'lastName' => $request->input('lastName'),
+            'gender'=> $request->input('gender'),
+            'email' => $request->input('email'),
+            'phoneNumber' => $request->input('phoneNumber'),
+            'address' => $request->input('address'),
+            'state' => $request->input('state'),
+            'country' => $request->input('country'),  
+            
+        ]);
+
+        if($customer){
+            return redirect()->route('customer.create')->with('success', 'Customer Record Saved Successfully..!');
+        }
+
+        return back()->withInput();
+
     }
 
     /**
@@ -46,7 +77,8 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        $customer = Customer::all();
+        return view('customer.show', ['customers'=>$customer]);
     }
 
     /**
@@ -57,7 +89,8 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        $customer = Customer::find($customer->id);
+        return view('customer.edit', ['customer' => $customer]);
     }
 
     /**
@@ -69,7 +102,22 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $customer = Customer::find($customer->id);
+        
+        $customer->firstName = $request->firstName;
+        $customer->lastName = $request->lastName;
+        $customer->gender = $request->gender;
+        $customer->phoneNumber = $request->phoneNumber;
+        $customer->email = $request->email;
+        $customer->address = $request->address;
+        $customer->state = $request->state;
+        $customer->country = $request->country;
+        
+        if($customer->save()){
+            return redirect()->route('customer.index')->with('success', 'Customer Record Updated Successfully');
+        }
+        return back()->withInput();
+
     }
 
     /**
@@ -80,6 +128,9 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer = Customer::find($customer->id);
+        if($customer->delete()){
+            return redirect()->route('customer.index')->with('success', 'Customer Record Deleted Successfully.');  
+        }
     }
 }

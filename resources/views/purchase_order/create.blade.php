@@ -1,6 +1,7 @@
 @extends('layouts.headerless')
 
 @section('content')
+@include('session.success')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -20,7 +21,7 @@
                             <label for="quantity" class="col-md-4 col-form-label text-md-right">{{ __('Quantity') }}</label>
 
                             <div class="col-md-6">
-                                <input id="quantity" type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity') }}" required autocomplete="quantity" autofocus>
+                                <input id="quantity" type="text" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity') }}" required autocomplete="quantity" autofocus>
 
                                 @error('quantity')
                                     <span class="invalid-feedback" role="alert">
@@ -82,6 +83,9 @@
                             <div class="col-md-6">
                              <select name="material_id" class="form-control" id="material_id"  required="required">
                                 <option value="">Select material ID</option>
+                                @foreach($purchaseData as $id => $name)
+                                <option value="{{$name}}">{{$id}}</option>
+                                 @endforeach
                             </select> 
                                 @error('material_id')
                                     <span class="invalid-feedback" role="alert">

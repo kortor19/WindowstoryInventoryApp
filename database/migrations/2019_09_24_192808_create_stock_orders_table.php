@@ -13,10 +13,8 @@ class CreateStockOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('stock__orders', function (Blueprint $table) {
+        Schema::create('stock_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('distributor_id')->nullable();
-            $table->foreign('distributor_id')->references('id')->on('distributors')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('variant_id');
@@ -33,6 +31,7 @@ class CreateStockOrdersTable extends Migration
             $table->string('out_in');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE stock_orders AUTO_INCREMENT = 10000000;");
     }
 
     /**
@@ -42,6 +41,6 @@ class CreateStockOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stock__orders');
+        Schema::dropIfExists('stock_orders');
     }
 }

@@ -13,14 +13,15 @@ class CreateProductOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('product__orders', function (Blueprint $table) {
+        Schema::create('product_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('product_name');
             $table->string('unit');
-            $table->unsignedBigInteger('product_category_id');
-            $table->foreign('product_category_id')->references('id')->on('product__categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('product_category_id')->nullable();
+            $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE product_orders AUTO_INCREMENT = 10000000;");
     }
 
     /**
@@ -30,6 +31,6 @@ class CreateProductOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product__orders');
+        Schema::dropIfExists('product_orders');
     }
 }

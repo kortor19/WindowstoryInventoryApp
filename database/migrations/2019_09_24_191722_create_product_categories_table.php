@@ -13,11 +13,12 @@ class CreateProductCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product__categories', function (Blueprint $table) {
+        Schema::create('product_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('product_category_name');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE product_categories AUTO_INCREMENT = 10000000;");
     }
 
     /**
@@ -27,6 +28,6 @@ class CreateProductCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product__categories');
+        Schema::dropIfExists('product_categories');
     }
 }

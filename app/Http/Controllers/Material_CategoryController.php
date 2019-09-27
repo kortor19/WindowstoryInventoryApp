@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Material_Category;
+use App\MaterialCategory;
 use Illuminate\Http\Request;
 
 class Material_CategoryController extends Controller
@@ -14,7 +14,8 @@ class Material_CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $materialCategory = MaterialCategory::all();
+        return view('material_category.show', ['material_categories'=>$materialCategory]);
     }
 
     /**
@@ -35,51 +36,76 @@ class Material_CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request-> validate([
+            'material_category_name'=> 'required',
+        ]);
+        
+        $materialCategory = MaterialCategory::create([
+
+            'material_category_name' => $request->input('material_category_name'),            
+        ]);
+
+        if($materialCategory){
+            return redirect()->route('material_category.create')->with('success', 'Material Category  Saved Successfully..!');
+        }
+
+        return back()->withInput();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Material_Category  $material_Category
+     * @param  \App\MaterialCategory  $materialCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(Material_Category $material_Category)
+    public function show(MaterialCategory $materialCategory)
     {
-        //
+        $materialCategory = MaterialCategory::all();
+        return view('material_category.show', ['material_categories'=>$materialCategory]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Material_Category  $material_Category
+     * @param  \App\MaterialCategory  $materialCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Material_Category $material_Category)
+    public function edit(MaterialCategory $materialCategory)
     {
-        //
+        $materialCategory = MaterialCategory::find($materialCategory->id);
+        return view('material_category.edit', ['materialCategory' => $materialCategory]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Material_Category  $material_Category
+     * @param  \App\MaterialCategory  $materialCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Material_Category $material_Category)
+    public function update(Request $request, MaterialCategory $materialCategory)
     {
-        //
+        $materialCategory = MaterialCategory::find($materialCategory->id);
+        
+        $materialCategory->material_category_name = $request->material_category_name;
+        
+        if($materialCategory->save()){
+            return redirect()->route('material_category.index')->with('success', 'Material Category Updated Successfully');
+        }
+        return back()->withInput();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Material_Category  $material_Category
+     * @param  \App\MaterialCategory  $materialCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Material_Category $material_Category)
+    public function destroy(MaterialCategory $materialCategory)
     {
-        //
+        $materialCategory = MaterialCategory::find($materialCategory->id);
+        if($materialCategory->delete()){
+            return redirect()->route('material_category.index')->with('success', 'Material Category Deleted Successfully.');  
+        }
     }
 }

@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class CreateMaterialCategoriesTable extends Migration
+
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateMaterialCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('material__categories', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('material_categories', function (Blueprint $table) {
+            $table->bigIncrements('id')->unique();
             $table->string('material_category_name');
             $table->timestamps();
+
         });
+        DB::statement("ALTER TABLE material_categories AUTO_INCREMENT = 10000000;"); 
+        
     }
 
     /**
@@ -27,6 +30,6 @@ class CreateMaterialCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('material__categories');
+        Schema::dropIfExists('material_categories');
     }
 }

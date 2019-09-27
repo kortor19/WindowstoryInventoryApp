@@ -13,17 +13,18 @@ class CreateMaterialOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('material__orders', function (Blueprint $table) {
+        Schema::create('material_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('material_name');
-            $table->unsignedBigInteger('material_category_id');
-            $table->foreign('material_category_id')->references('id')->on('material__categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('material_category_id')->nullable();
+            $table->foreign('material_category_id')->references('id')->on('material_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->string('unit_of_measurement');
-            $table->string('reorder_point');
-            $table->unsignedBigInteger('variant_id');
+            $table->string('reorder_points');
+            $table->unsignedBigInteger('variant_id')->nullable();
             $table->foreign('variant_id')->references('id')->on('variants')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE material_orders AUTO_INCREMENT = 10000000;");
     }
 
     /**
@@ -33,6 +34,6 @@ class CreateMaterialOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('material__orders');
+        Schema::dropIfExists('material_orders');
     }
 }

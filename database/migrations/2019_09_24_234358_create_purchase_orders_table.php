@@ -13,16 +13,17 @@ class CreatePurchaseOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase__orders', function (Blueprint $table) {
+        Schema::create('purchase_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('quantity');
             $table->string('price_per_unit');
             $table->string('total');
             $table->string('tax');
-            $table->unsignedBigInteger('material_id');
-            $table->foreign('material_id')->references('id')->on('material__orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('material_id')->nullable();
+            $table->foreign('material_id')->references('id')->on('material_orders')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE purchase_orders AUTO_INCREMENT = 10000000;");
     }
 
     /**
@@ -32,6 +33,6 @@ class CreatePurchaseOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase__orders');
+        Schema::dropIfExists('purchase_orders');
     }
 }

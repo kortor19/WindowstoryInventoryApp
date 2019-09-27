@@ -14,17 +14,18 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->unique();
             $table->string('firstName');
             $table->string('lastName');
             $table->string('gender');
             $table->string('phoneNumber');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('address');
             $table->string('state');
             $table->string('country');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE customers AUTO_INCREMENT = 10000000;");
     }
 
     /**

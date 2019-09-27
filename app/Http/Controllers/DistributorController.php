@@ -14,7 +14,8 @@ class DistributorController extends Controller
      */
     public function index()
     {
-        //
+        $distributor = Distributor::all();
+        return view('distributor.show', ['distributors'=>$distributor]);
     }
 
     /**
@@ -35,7 +36,37 @@ class DistributorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request-> validate([
+            'firstName'=> 'required',
+            'lastName'=> 'required',
+            'gender'=>'required',
+            'email'=> 'required',
+            'phoneNumber'=> 'required|numeric',
+            'address'=> 'required',
+            'companyName' => 'required',
+            'country'=>'required',
+            
+        ]);
+        
+        $distributor = Distributor::create([
+
+            'firstName' => $request->input('firstName'),
+            'lastName' => $request->input('lastName'),
+            'gender'=> $request->input('gender'),
+            'email' => $request->input('email'),
+            'phoneNumber' => $request->input('phoneNumber'),
+            'address' => $request->input('address'),
+            'companyName' => $request->input('companyName'),
+            'country' => $request->input('country'),  
+            
+        ]);
+
+        if($distributor){
+            return redirect()->route('distributor.create')->with('success', 'Distributor Record Saved Successfully..!');
+        }
+
+        return back()->withInput();
+
     }
 
     /**
@@ -46,7 +77,8 @@ class DistributorController extends Controller
      */
     public function show(Distributor $distributor)
     {
-        //
+        $distributor = Distributor::all();
+        return view('distributor.show', ['distributors'=>$distributor]);
     }
 
     /**
@@ -57,7 +89,8 @@ class DistributorController extends Controller
      */
     public function edit(Distributor $distributor)
     {
-        //
+        $distributor = Distributor::find($distributor->id);
+        return view('distributor.edit', ['distributor' => $distributor]);
     }
 
     /**
@@ -69,7 +102,22 @@ class DistributorController extends Controller
      */
     public function update(Request $request, Distributor $distributor)
     {
-        //
+        $distributor = Distributor::find($distributor->id);
+        
+        $distributor->firstName = $request->firstName;
+        $distributor->lastName = $request->lastName;
+        $distributor->gender = $request->gender;
+        $distributor->phoneNumber = $request->phoneNumber;
+        $distributor->email = $request->email;
+        $distributor->address = $request->address;
+        $distributor->companyName = $request->companyName;
+        $distributor->country = $request->country;
+        
+        if($distributor->save()){
+            return redirect()->route('distributor.index')->with('success', 'Distributor Record Updated Successfully');
+        }
+        return back()->withInput();
+ 
     }
 
     /**
@@ -80,6 +128,9 @@ class DistributorController extends Controller
      */
     public function destroy(Distributor $distributor)
     {
-        //
+        $distributor = Distributor::find($distributor->id);
+        if($distributor->delete()){
+            return redirect()->route('distributor.index')->with('success', 'Distributor Record Deleted Successfully.');  
+        }
     }
 }

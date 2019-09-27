@@ -25,6 +25,7 @@ class CreateDistributorsTable extends Migration
             $table->string('country');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE distributors AUTO_INCREMENT = 10000000;");
     }
 
     /**

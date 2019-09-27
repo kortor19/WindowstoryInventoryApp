@@ -1,10 +1,11 @@
 @extends('layouts.headerless')
 
 @section('content')
+@include('session.success')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card border-primary loginfrm">
+            <div class="card border-primary distributorfrm">
 
                 <div class="logo">
                     <img src="{{ asset('images/winlogo.png') }}" class="img-fluid" alt="Windowstory Limited">

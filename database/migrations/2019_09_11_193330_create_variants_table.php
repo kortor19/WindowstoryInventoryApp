@@ -26,6 +26,7 @@ class CreateVariantsTable extends Migration
             $table->string('default_price');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE variants AUTO_INCREMENT = 10000000;");
     }
 
     /**

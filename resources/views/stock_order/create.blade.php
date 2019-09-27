@@ -24,6 +24,7 @@
                 </div>              
 
                 <div class="container">
+                <br>
                     <form method="POST" action="{{ route('stock_order.store') }}">
                         @csrf
 
@@ -32,12 +33,12 @@
                         <div class="row">
                         <div class="col-md-6">
                             <div class = "form-group">
-                            <input type="text" name="distributor_id" class="form-control" placeholder="distributor Id">
+                            <input type="text" name="customer_name" class="form-control" placeholder="please enter customer name">
 
                            </div></div>
                            <div class="col-md-6">
                             <div class = "form-group">
-                            <input type="text" name="customer_id" class="form-control" placeholder="customer Id">
+                            <input type="text" name="address" class="form-control" placeholder="please enter customer address">
 
                         </div></div>
                         </div></div>
@@ -46,9 +47,9 @@
                         <table class="table table-bordered">
                         <thead>
                         <tr>
-                        <th>Variant ID</th>
+                        <th>Variant Code</th
                         <th>Item Name</th>
-                        <th>Weight</th>
+                        <th>Width</th>
                         <th>Height</th>
                         <th>SQM</th>
                         <th>Quantity</th>
@@ -61,9 +62,9 @@
                         </thead>
                         <tbody>
                         <tr>
-                        <td><input type="text" name="variant_id[]" class="form-control variant_id"></td>
+                        <td><input type="text" name="variant_code[]" class="form-control variant_code"></td>
                         <td><input type="text" name="item_name[]" class="form-control item_name"></td>
-                        <td><input type="text" name="weight[]" class="form-control weight"></td>
+                        <td><input type="text" name="width[]" class="form-control width"></td>
                         <td><input type="text" name="height[]" class="form-control height"></td>
                         <td><input type="text" name="sqm[]" class="form-control sqm"></td>
                         <td><input type="text" name="quantity[]" class="form-control quantity"></td>
@@ -100,13 +101,13 @@
                 </div> 
 
                 <script type="text/javascript">
-                $('tbody').delegate('.quantity, .unit_price, .weight, .height', 'keyup', function(){
+                $('tbody').delegate('.quantity, .unit_price, .width, .height', 'keyup', function(){
                     var tr = $(this).parent().parent();
                     var quantity = tr.find('.quantity').val();
                     var unit_price = tr.find('.unit_price').val();
-                    var weight = tr.find('.weight').val();
+                    var width = tr.find('.width').val();
                     var height = tr.find('.height').val();
-                    var sqm = (weight * height);
+                    var sqm = (width * height);
                     var amount = (quantity * unit_price);
                     tr.find('.sqm').val(sqm);
                     tr.find('.amount').val(amount);
@@ -128,9 +129,9 @@
 
                     function addRow(){
                         var tr = '<tr>' +
-                        '<td><input type="text" name="variant_id[]" class="form-control variant_id"></td>' +
+                        '<td><input type="text" name="variant_code[]" class="form-control variant_code"></td>' +
                         '<td><input type="text" name="item_name[]" class="form-control item_name"></td>' +
-                        '<td><input type="text" name="weight[]" class="form-control weight"></td>' +
+                        '<td><input type="text" name="width[]" class="form-control width"></td>' +
                         '<td><input type="text" name="height[]" class="form-control height"></td>' +
                         '<td><input type="text" name="sqm[]" class="form-control sqm"></td>' +
                         '<td><input type="text" name="quantity[]" class="form-control quantity"></td>' +
