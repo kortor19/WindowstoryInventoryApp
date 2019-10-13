@@ -26,18 +26,14 @@ class Material_OrderController extends Controller
      */
     public function create()
     {
-        // $data = DB::table('material_orders')
-        // ->join('material_categories', 'material_categories.id', '='. 'material_orders.material_category_id')
-        // ->join('variants', 'variants.id', '=', 'material_orders.variant_id')
-        // ->select('material_orders.material_name', 'material_categories.material_category_name', 'variants.variant_code')
-        // ->get();
-
-        // return view('material_order.create', compact('data'));
-
         
-        //$materialData = DB::table('material_categories')->pluck('id', 'material_category_name');
-        //return view('material_order.create')->with('materialData', $materialData);
-        // return view('material_order.create');
+        
+        $materialData = DB::table('material_categories')->pluck('id', 'material_category_name');
+        $variantData = DB::table('variants')->pluck('id', 'variant_code');
+
+        return view('material_order.create')->with('materialData', $materialData)
+                                ->with('variantData', $variantData);
+        
     }
 
     /**
@@ -93,7 +89,8 @@ class Material_OrderController extends Controller
      */
     public function edit(MaterialOrder $materialOrder)
     {
-        //
+        $materialOrder = MaterialOrder::find($materialOrder->id);
+        return view('material_order.edit', ['materialOrder' => $materialOrder]);
     }
 
     /**
@@ -105,7 +102,18 @@ class Material_OrderController extends Controller
      */
     public function update(Request $request, MaterialOrder $materialOrder)
     {
-        //
+        $materialOrder = MaterialOrder::find($materialOrder->id);
+        
+        $materialOrder->material_name = $request->material_name;
+        $materialOrder->material_category_id = $request->material_category_id;
+        $materialOrder->unit_of_measurement = $request->unit_of_measurement;
+        $materialOrder->reorder_points = $request->reorder_points;
+        $materialOrder->variant_id = $request->variant_id;
+        
+        if($materialOrder->save()){
+            return redirect()->route('material_order.index')->with('success', 'Material Order Updated Successfully');
+        }
+        return back()->withInput();
     }
 
     /**
@@ -116,6 +124,9 @@ class Material_OrderController extends Controller
      */
     public function destroy(MaterialOrder $materialOrder)
     {
-        //
+        $materialOrder = MaterialOrder::find($materialOrder->id);
+        if($materialOrder->delete()){
+            return redirect()->route('material_order.index')->with('success', 'Material Order Deleted Successfully.');  
+        }
     }
 }

@@ -2,7 +2,9 @@
 
 @section('content')
 @include('session.success')
+
 <div class="container">
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card border-primary loginfrm">
@@ -21,7 +23,7 @@
                             <label for="quantity" class="col-md-4 col-form-label text-md-right">{{ __('Quantity') }}</label>
 
                             <div class="col-md-6">
-                                <input id="quantity" type="text" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity') }}" required autocomplete="quantity" autofocus>
+                                <input id="quantity" type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value=" " required autocomplete="quantity" autofocus>
 
                                 @error('quantity')
                                     <span class="invalid-feedback" role="alert">
@@ -35,7 +37,7 @@
                             <label for="price_per_unit" class="col-md-4 col-form-label text-md-right">{{ __('Price Per Unit') }}</label>
 
                             <div class="col-md-6">
-                                <input id="price_per_unit" type="text" class="form-control @error('price_per_unit') is-invalid @enderror" name="price_per_unit" value="{{ old('price_per_unit') }}" required autocomplete="price_per_unit" autofocus>
+                                <input id="price_per_unit" type="number" class="form-control @error('price_per_unit') is-invalid @enderror" name="price_per_unit" value=" " required autocomplete="price_per_unit" autofocus>
 
                                 @error('price_per_unit')
                                     <span class="invalid-feedback" role="alert">
@@ -49,7 +51,7 @@
                             <label for="total" class="col-md-4 col-form-label text-md-right">{{ __('Total') }}</label>
 
                             <div class="col-md-6">
-                            <input id="total" type="text" class="form-control @error('total') is-invalid @enderror" name="total" value="{{ old('total') }}" required autocomplete="total" autofocus>
+                            <input id="total" type="number" class="form-control @error('total') is-invalid @enderror" name="total" value=" " required autocomplete="total" autofocus>
 
                             <!-- <select name="gender" class="form-control" id="gender"  required="required">
                                 <option value="male">Male</option>
@@ -107,6 +109,7 @@
                             
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

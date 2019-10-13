@@ -1,4 +1,12 @@
 {
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true
+    },
+
     "workbench.colorCustomizations": {
         "activityBar.background": "#0D3504",
         "titleBar.activeBackground": "#124B05",

@@ -16,11 +16,11 @@ class CreateMaterialOrdersTable extends Migration
         Schema::create('material_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('material_name');
-            $table->unsignedBigInteger('material_category_id')->nullable();
+            $table->unsignedBigInteger('material_category_id');
             $table->foreign('material_category_id')->references('id')->on('material_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->string('unit_of_measurement');
             $table->string('reorder_points');
-            $table->unsignedBigInteger('variant_id')->nullable();
+            $table->unsignedBigInteger('variant_id');
             $table->foreign('variant_id')->references('id')->on('variants')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

@@ -1,6 +1,7 @@
 @extends('layouts.headerless')
-
 @section('content')
+@include('session.success')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -36,10 +37,10 @@
                             <div class="col-md-6">
                             <select name="material_category_id" class="form-control" id="material_category_id"  required="required">
                                 <option value="">select category id</option>
-                                @foreach($data as $id => $name)
+                                @foreach($materialData as $id => $name)
                                 <option value="{{$name}}">{{$id}}</option>
-                                @endforeach
-                            </select>
+                                 @endforeach
+                                </select>
                                 @error('material_category_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -63,12 +64,12 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="reorder_point" class="col-md-4 col-form-label text-md-right">{{ __('Reorder Points') }}</label>
+                            <label for="reorder_points" class="col-md-4 col-form-label text-md-right">{{ __('Reorder Points') }}</label>
 
                             <div class="col-md-6">
-                                <input id="reorder_point" type="text" class="form-control @error('reorder_point') is-invalid @enderror" name="reorder_point" value="{{ old('reorder_point') }}" required autocomplete="reorder_point">
+                                <input id="reorder_points" type="text" class="form-control @error('reorder_points') is-invalid @enderror" name="reorder_points" value="{{ old('reorder_points') }}" required autocomplete="reorder_points">
 
-                                @error('reorder_point')
+                                @error('reorder_points')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -83,6 +84,9 @@
                             <div class="col-md-6">
                             <select name="variant_id" class="form-control" id="variant_id"  required="required">
                                 <option value="">select variant id</option>
+                                @foreach($variantData as $id => $name)
+                                <option value="{{$name}}">{{$id}}</option>
+                                 @endforeach
                             </select>
                                 @error('variant_id')
                                     <span class="invalid-feedback" role="alert">
@@ -104,7 +108,16 @@
                         </div>
                     </form>
                 </div>
+
+
             </div>
+            <div class="col-sm-6">
+    @if($errors->any())
+    @foreach($errors->all() as $errors)
+    <li class="text-danger">{{$errors}} </li>
+    @endforeach
+    @endif
+</div>
         </div>
     </div>
 </div>
